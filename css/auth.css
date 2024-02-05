@@ -4,16 +4,38 @@
   
 }
 
+/* Define the styles for the scrollbar track */
+::-webkit-scrollbar {
+  width: 2px; /* Set the width of the scrollbar */
+  background-color: #070708; /* Set the color of the thumb */
+}
+
+/* Define the styles for the scrollbar handle or thumb */
+::-webkit-scrollbar-thumb {
+  background-color: #d0d1d1; /* Set the color of the thumb */
+  border-radius: 6x; /* Set the border radius to round the corners */
+}
+
+/* Define the styles for the scrollbar track on hover */
+::-webkit-scrollbar-track:hover {
+  background-color: #242a37; /* Set the background color on hover */
+}
+
+/* Define the styles for the scrollbar handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background-color: #ffffff; /* Set the thumb color on hover */
+}
+
 body {
   width: 100%;
-  height: ;
+  /* height: ; */
   font-size:17px;
   color:#ffffff;
   line-height:28px;
   font-weight:400;
   background:  rgba(12, 14, 24, 0.912);
   font-family: var(--text-font);
-  background-image: url(img/loginimage1.jpg);
+  background-image: url(../img/loginimage1.jpg);
   background-size:contain;
   background-repeat:no-repeat;
   background-position:right top;
