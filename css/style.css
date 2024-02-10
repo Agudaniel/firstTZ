@@ -5342,7 +5342,7 @@ div#mCSB_1_container{
 .chooseus-style-two .single-item .icon-box:before{
   position: absolute;
   content: '';
-  background-image: url(../../assets/images/shape/shape-15.png);
+  background-image: url(../../images/shape/shape-15.png);
   width: 56px;
   height: 59px;
   left: 0px;
@@ -7697,7 +7697,7 @@ div#mCSB_1_container{
 .benefits-section .content-box .list-item li:before{
   position: absolute;
   content: '';
-  background-image: url(../../assets/images/icons/icon-55.png);
+  background-image: url(../../images/icons/icon-55.png);
   left: 0px;
   top: 9px;
   width: 14px;
@@ -10334,7 +10334,7 @@ div#mCSB_1_container{
 .statements-section .tab-btns li:before{
   position: absolute;
   content: '';
-  background-image: url(../../assets/images/shape/shape-46.png);
+  background-image: url(../../images/shape/shape-46.png);
   width: 150px;
   height: 170px;
   left: 0px;
@@ -10350,7 +10350,7 @@ div#mCSB_1_container{
 .statements-section .tab-btns li:after{
   position: absolute;
   content: '';
-  background-image: url(../../assets/images/shape/shape-47.png);
+  background-image: url(../../images/shape/shape-47.png);
   width: 150px;
   height: 170px;
   left: 0px;
@@ -12444,7 +12444,7 @@ label.error{
 .error-section .content-box h1:before{
   position: absolute;
   content: '';
-  background-image: url(../../assets/images/icons/icon-89.png);
+  background-image: url(../../images/icons/icon-89.png);
   width: 220px;
   height: 220px;
   left: 50%;
