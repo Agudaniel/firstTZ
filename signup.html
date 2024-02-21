@@ -398,7 +398,9 @@
                             balance: "000,000.00"
                         });
                         alert("Account created successfully!");
-                        location.replace("login.html");
+                        setTimeout(function() {
+                        window.location.href = "login.html";
+                        }, 1000);
                     })
                     .catch((error) => {
                         alert(error.message);
