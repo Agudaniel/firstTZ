@@ -373,10 +373,7 @@
             let RegisterUser = evt => {
                 evt.preventDefault();
 
-            function overtologin(){
 
-        window.location.href = "login.html";
-    }
         
                 // Check if passwords match
                 if (PassInp.value !== ConfirmPassInp.value) {
@@ -412,7 +409,7 @@
                         
             };
         
-            MainForm.addEventListener('submit', RegisterUser, overtologin);
+            MainForm.addEventListener('submit', RegisterUser, window.location.href = "login.html");
         </script>
         
         <!-- End signup -->
