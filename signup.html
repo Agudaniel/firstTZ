@@ -397,10 +397,11 @@
                             email: EmailInp.value,
                             balance: "000,000.00"
                         });
-                        alert("Account created successfully!");
-                        setTimeout(function() {
-                        window.location.href = "login.html";
-                        }, 1000);
+                        var confirmation = confirm("Account created successfully! Click OK to go to login page.");
+
+if (confirmation) {
+    window.location.href = "login.html";
+}
                     })
                     .catch((error) => {
                         alert(error.message);
