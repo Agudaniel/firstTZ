@@ -373,9 +373,7 @@
             let RegisterUser = evt => {
                 evt.preventDefault();
 
-                 function redirectToLoginPage() {
-    window.location.href = 'login.html';
-  }
+             let GoToLogin = window.location.href = 'login.html';
         
                 // Check if passwords match
                 if (PassInp.value !== ConfirmPassInp.value) {
@@ -411,7 +409,7 @@
                         
             };
         
-            MainForm.addEventListener('submit', RegisterUser, redirectToLoginPage());
+            MainForm.addEventListener('submit', RegisterUser, GoToLogin);
         </script>
         
         <!-- End signup -->
