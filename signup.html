@@ -402,16 +402,16 @@
                             balance: "000,000.00"
                         });
                         alert("Registration successful! You can now login.");
-                        redirectToLoginPage();
                     })
                     .catch((error) => {
                         alert(error.message);
                         console.error(error.message);
                         console.error(error.code);
                     });
+                        
             };
         
-            MainForm.addEventListener('submit', RegisterUser);
+            MainForm.addEventListener('submit', RegisterUser, redirectToLoginPage());
         </script>
         
         <!-- End signup -->
