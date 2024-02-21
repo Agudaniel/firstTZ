@@ -372,6 +372,10 @@
         
             let RegisterUser = evt => {
                 evt.preventDefault();
+
+                 function redirectToLoginPage() {
+    window.location.href = 'login.html';
+  }
         
                 // Check if passwords match
                 if (PassInp.value !== ConfirmPassInp.value) {
@@ -397,11 +401,8 @@
                             email: EmailInp.value,
                             balance: "000,000.00"
                         });
-                        var confirmation = confirm("Account created successfully! Click OK to go to login page.");
-
-if (confirmation) {
-    window.location.href = "login.html";
-}
+                        alert("Registration successful! You can now login.");
+                        redirectToLoginPage();
                     })
                     .catch((error) => {
                         alert(error.message);
