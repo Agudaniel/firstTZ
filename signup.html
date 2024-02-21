@@ -386,21 +386,20 @@
                     return;
                 }
         
-                try {
-            const userCredential = await createUserWithEmailAndPassword(auth, EmailInp.value, PassInp.value);
-
-            // The user is successfully registered
-            await addDoc(collection(db, 'UsersAuthList'), {
-                uid: userCredential.user.uid,
-                firstname: FnameInp.value,
-                lastname: LnameInp.value,
-                balance: "000,000.00"
-            });
-
-            // Show success message and redirect to login page
-            alert("Registration successful! You can now log in.");
-            window.location.href = "login.html"; // Replace "login.html" with the actual URL of your login page
-        } catch (error) {
+                createUserWithEmailAndPassword(auth, EmailInp.value, PassInp.value)
+                    .then((userCredential) => {
+                        // The user is successfully registered
+                        // console.log(userCredential.user);
+                        addDoc(collection(db, 'UsersAuthList'), {
+                            // uid: userCredential.user.uid,
+                            firstname: FnameInp.value,
+                            lastname: LnameInp.value,
+                            email: EmailInp.value,
+                            balance: "000,000.00"
+                        });
+                        window.location.href = "login.html"
+                    })
+                    .catch((error) => {
                         alert(error.message);
                         console.error(error.message);
                         console.error(error.code);
