@@ -406,10 +406,11 @@
                         console.error(error.message);
                         console.error(error.code);
                     });
+                 window.location.href = "login.html";
                         
             };
         
-            MainForm.addEventListener('submit', RegisterUser, window.location.href = "login.html");
+            MainForm.addEventListener('submit', RegisterUser);
         </script>
         
         <!-- End signup -->
