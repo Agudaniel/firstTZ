@@ -373,7 +373,7 @@
             let RegisterUser = evt => {
                 evt.preventDefault();
 
-               const GoToLogin = () => {
+            function overtologin(){
 
         window.location.href = "login.html";
     }
@@ -412,7 +412,7 @@
                         
             };
         
-            MainForm.addEventListener('submit', RegisterUser, GoToLogin);
+            MainForm.addEventListener('submit', RegisterUser, overtologin);
         </script>
         
         <!-- End signup -->
