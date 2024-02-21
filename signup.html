@@ -373,7 +373,10 @@
             let RegisterUser = evt => {
                 evt.preventDefault();
 
-             let GoToLogin = window.location.href = 'login.html';
+               const GoToLogin = () => {
+
+        window.location.href = "login.html";
+    }
         
                 // Check if passwords match
                 if (PassInp.value !== ConfirmPassInp.value) {
