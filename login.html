@@ -253,11 +253,12 @@
             <!-- Fix capitalization here -->
             <hr>
         
-            <p>By creating an account, you agree to our <a href="#">Terms & Privacy</a>.</p>
+            <!-- <p>By creating an account, you agree to our <a href="#">Terms & Privacy</a>.</p> -->
             <button type="submit" class="registerbtn">Login</button>
             <div class="container signin">
             <p>Already have an account? <button type="button"><a href="signup.html">Sign up</a></button></p>
-            <p><button type="button"><a href="signup.html">forgot Password?</a></button></p>
+            <!-- <p><button type="button"><a href="signup.html">Forgot Password?</a></button></p> -->
+            <label id="forgotpasslabel">Forgot Password?</label>
           </div>
           </div>
     
@@ -269,9 +270,9 @@
         </form>
     
         <script type="module">
-          import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-app.js";
-    import { getDatabase, get, ref, child } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-database.js";
-    import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-auth.js";
+            import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-app.js";
+            import { getDatabase, get, ref, child } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-database.js";
+            import { getAuth, signInWithEmailAndPassword, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-auth.js";
     
     const firebaseConfig = {
             apiKey: "AIzaSyAVYnmzJvPlFWOjXiJDFChXZ8zAzQp1Ufw",
@@ -293,6 +294,7 @@
     let EmailInp = document.getElementById('emailInp');
     let PassInp = document.getElementById('passwordInp');
     let MainForm = document.getElementById('MainForm');
+    let ForgotPassLabel = document.getElementById('forgotpasslabel');
     
     let SignInUser = evt => {
       evt.preventDefault();
@@ -320,8 +322,21 @@
           console.error(error.code);
         });
     };
+
+    let ForgotPassword = ()=> {
+        sendPasswordResetEmail(auth, EmailInp.value)
+        .then(()=>{
+            alert("A password reset link has been sent to your email");
+        })
+        .catch((error)=>{
+            console.log(error.code);
+            console.log(error.message);
+        })
+    }
+    
     
     MainForm.addEventListener('submit', SignInUser);
+    ForgotPassLabel.addEventListener('click', ForgotPassword);
         </script>
         <!-- End login -->
 
