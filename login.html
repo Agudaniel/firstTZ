@@ -215,9 +215,9 @@
                 <div class="contact-info">
                     <h4>Contact Info</h4>
                     <ul>
-                        <li>Chicago 12, Melborne City, USA</li>
-                        <li><a href="tel:+8801682648101">+88 01682648101</a></li>
-                        <li><a href="mailto:info@example.com">info@example.com</a></li>
+                        <li>850 Third Avenue, 15th Fl, New York, USA</li>
+                        <li><a href="tel:+16465351541"> +1(646)535-1541</a></li>
+                        <li><a href="mailto:tradingzanga@gmail.com">tradingzanga@gmail.com</a></li>
                     </ul>
                 </div>
                 <!-- <div class="social-links">
@@ -269,77 +269,85 @@
         </div>
         </form>
     
-        <script type="module">
-            import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-app.js";
-            // import { getDatabase, get, ref, child } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-database.js";
-            import { getFirestore, collection, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-firestore.js";
-            import { getAuth, signInWithEmailAndPassword, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-auth.js";
+        <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+      import { getFirestore, doc, getDoc} from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+      import { getAuth, signInWithEmailAndPassword, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
     
-    const firebaseConfig = {
-            apiKey: "AIzaSyAVYnmzJvPlFWOjXiJDFChXZ8zAzQp1Ufw",
-            authDomain: "oceandwell-01.firebaseapp.com",
-            databaseURL: "https://oceandwell-01-default-rtdb.firebaseio.com",
-            projectId: "oceandwell-01",
-            storageBucket: "oceandwell-01.appspot.com",
-            messagingSenderId: "288421578797",
-            appId: "1:288421578797:web:5c1a7abf0b7e133b5190a4",
-            measurementId: "G-LFHVNGR715"
-          };
+      const firebaseConfig = {
+        apiKey: "AIzaSyAVYnmzJvPlFWOjXiJDFChXZ8zAzQp1Ufw",
+        authDomain: "oceandwell-01.firebaseapp.com",
+        databaseURL: "https://oceandwell-01-default-rtdb.firebaseio.com",
+        projectId: "oceandwell-01",
+        storageBucket: "oceandwell-01.appspot.com",
+        messagingSenderId: "288421578797",
+        appId: "1:288421578797:web:5c1a7abf0b7e133b5190a4",
+        measurementId: "G-LFHVNGR715"
+      };
     
-    // Initialize Firebase
-    const app = initializeApp(firebaseConfig);
-    // const db = getDatabase();
-    const db = getFirestore();
-    const auth = getAuth(app);
-    // const dbref = ref(db);
-    
-    let EmailInp = document.getElementById('emailInp');
-    let PassInp = document.getElementById('passwordInp');
-    let MainForm = document.getElementById('MainForm');
-    let ForgotPassLabel = document.getElementById('forgotpasslabel');
-      
-    let SignInUser = evt => {
-      evt.preventDefault();
-    
-      signInWithEmailAndPassword(auth, EmailInp.value, PassInp.value)
-        .then((userCredential) => {
-          // The user is successfully registered
-          // console.log(userCredential.user);
-          const user = userCredential.user;
-    
-          get(child(dbref, 'UsersAuthList/' + user.uid)).then((snapshot) => {
-            if(snapshot.exists()) {
-              sessionStorage.setItem("user-info", JSON.stringify({
-                  firstname: snapshot.val().firstname,
-                  lastname: snapshot.val().lastname,
-              }))
-              sessionStorage.setItem("user-creds", JSON.stringify(user));
-              window.location.href = 'dashboard/index.html';  // Fix: Change 'ref' to 'href'
-            }
-          })
-        })
-        .catch((error) => {
-          alert(error.message);
-          console.error(error.message);
-          console.error(error.code);
-        });
-    };
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+      const db = getFirestore();
+      const auth = getAuth(app);
+      // const dbref = ref(db);
 
-    let ForgotPassword = ()=> {
-        sendPasswordResetEmail(auth, EmailInp.value)
-        .then(()=>{
-            alert("A password reset link has been sent to your email");
-        })
-        .catch((error)=>{
-            console.log(error.code);
-            console.log(error.message);
-        })
-    }
+      let EmailInp = document.getElementById('emailInp');
+      let PassInp = document.getElementById('passwordInp');
+      let MainForm = document.getElementById('MainForm');
+
+    //   let SignInUser = evt => {
+    //   evt.preventDefault();
+
+    //   signInWithEmailAndPassword(auth, EmailInp.value, PassInp.value)
+    //     .then((userCredential) => {
+ 
+    //       console.log(userCredential);
     
-    
-    MainForm.addEventListener('submit', SignInUser);
-    ForgotPassLabel.addEventListener('click', ForgotPassword);
-        </script>
+          
+    //     })
+    //     .catch((error) => {
+    //       alert(error.message);
+    //       console.error(error.message);
+    //       console.error(error.code);
+    //     });
+    // };
+
+    let SignInUser = evt => {
+  evt.preventDefault();
+
+  signInWithEmailAndPassword(auth, EmailInp.value, PassInp.value)
+    .then(async (userCredential) => {
+
+      var ref = doc(db, "UserAuthList", userCredential.user.uid);
+      const docSnap = await getDoc(ref);
+
+      if (docSnap.exists()) {
+        sessionStorage.setItem("user-info", JSON.stringify({
+          firstname: docSnap.data().firstname,
+          lastname: docSnap.data().lastname,
+          balance: docSnap.data().balance
+        }));
+        sessionStorage.setItem("user-creds", JSON.stringify(userCredential.user));
+        window.location.href = "dashboard/home.html";
+      }
+
+    })
+    .catch((error) => {
+      alert(error.message);
+      console.error(error.message);
+      console.error(error.code);
+    });
+};
+
+      MainForm.addEventListener('submit', SignInUser);
+
+
+    </script>
         <!-- End login -->
 
 

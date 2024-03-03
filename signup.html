@@ -15,6 +15,13 @@
 <link href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;0,1000;1,300;1,400;1,500;1,600;1,700;1,800;1,900;1,1000&display=swap" rel="stylesheet">
 
 <!-- Stylesheets -->
+<link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    
 <link href="css/font-awesome-all.css" rel="stylesheet">
 <link href="css/flaticon.css" rel="stylesheet">
 <link href="css/owl.css" rel="stylesheet">
@@ -276,77 +283,11 @@
           
         </form>
     
-        <!-- <script type="module">
-            import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-app.js";
-            import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-database.js";
-            import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-auth.js";
-
-            const firebaseConfig = {
-                    apiKey: "AIzaSyAVYnmzJvPlFWOjXiJDFChXZ8zAzQp1Ufw",
-                    authDomain: "oceandwell-01.firebaseapp.com",
-                    databaseURL: "https://oceandwell-01-default-rtdb.firebaseio.com",
-                    projectId: "oceandwell-01",
-                    storageBucket: "oceandwell-01.appspot.com",
-                    messagingSenderId: "288421578797",
-                    appId: "1:288421578797:web:5c1a7abf0b7e133b5190a4",
-                    measurementId: "G-LFHVNGR715"
-                };
-    
-            // Initialize Firebase
-            const app = initializeApp(firebaseConfig);
-            const db = getDatabase();
-            const auth = getAuth(app);
-            
-            let EmailInp = document.getElementById('emailInp');
-            let PassInp = document.getElementById('passwordInp');
-            let ConfirmPassInp = document.getElementById('confirmPasswordInp');
-            let FnameInp = document.getElementById('fnameInp');
-            let LnameInp = document.getElementById('lnameInp');
-            let MainForm = document.getElementById('MainForm');
-            
-            let RegisterUser = evt => {
-            evt.preventDefault();
-
-                // Check if passwords match
-            if (PassInp.value !== ConfirmPassInp.value) {
-                alert("Passwords do not match.");
-                return;
-            }
-
-            const passwordRegex = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
-
-            if (!passwordRegex.test(PassInp.value)) {
-            alert("Password must contain at least 6 characters, including at least one alphabet, one number, and one special character.");
-            return;
-            }
-    
-            createUserWithEmailAndPassword(auth, EmailInp.value, PassInp.value)
-                .then((userCredential) => {
-                // The user is successfully registered
-                // console.log(userCredential.user);
-                set(ref(db, 'UsersAuthList/' + userCredential.user.uid),{
-                    firstname: FnameInp.value,
-                    lastname: LnameInp.value,
-                    balance: "000,000.00"
-            
-                })
-                })
-                .catch((error) => {
-                alert(error.message);
-                console.error(error.message);
-                console.error(error.code);
-                });
-            };
-            
-            MainForm.addEventListener('submit', RegisterUser);
-    
-        </script> -->
-
 
         <script type="module">
-            import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-app.js";
-            import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-firestore.js"; // Import Firestore functions
-            import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-auth.js";
+            import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+            import { getFirestore, doc, setDoc, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js"; 
+            import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
         
             const firebaseConfig = {
                 apiKey: "AIzaSyAVYnmzJvPlFWOjXiJDFChXZ8zAzQp1Ufw",
@@ -360,7 +301,7 @@
         
             // Initialize Firebase
             const app = initializeApp(firebaseConfig);
-            const db = getFirestore(app); // Initialize Firestore
+            const db = getFirestore(app);
             const auth = getAuth(app);
         
             let EmailInp = document.getElementById('emailInp');
@@ -372,12 +313,13 @@
         
             let RegisterUser = evt => {
                 evt.preventDefault();
-
-
+        
+                console.log("Registration started...");
         
                 // Check if passwords match
                 if (PassInp.value !== ConfirmPassInp.value) {
                     alert("Passwords do not match.");
+                    console.error("Passwords do not match.");
                     return;
                 }
         
@@ -385,40 +327,44 @@
         
                 if (!passwordRegex.test(PassInp.value)) {
                     alert("Password must contain at least 6 characters, including at least one alphabet, one number, and one special character.");
+                    console.error("Invalid password format.");
                     return;
                 }
         
                 createUserWithEmailAndPassword(auth, EmailInp.value, PassInp.value)
-                    .then((userCredential) => {
-                        // The user is successfully registered
-                        // console.log(userCredential.user);
-                        addDoc(collection(db, 'UsersAuthList'), {
-                            // uid: userCredential.user.uid,
+                    .then(async(userCredential) => {
+                        console.log("User created successfully:", userCredential.user);
+        
+                        var userRef = doc(db, 'UserAuthList', userCredential.user.uid);
+                        await setDoc(userRef, {
                             firstname: FnameInp.value,
                             lastname: LnameInp.value,
                             email: EmailInp.value,
-                            balance: "000,000.00"
+                            balance: 0.00
                         });
-                        alert("Registration successful! You can now login.");
+        
+                        alert("Account Created! You can now login");
                     })
                     .catch((error) => {
                         alert(error.message);
-                        console.error(error.message);
-                        console.error(error.code);
+                        console.error("Error during user creation:", error.message);
+                        console.error("Error code:", error.code);
                     });
-              
-                        
             };
         
             MainForm.addEventListener('submit', RegisterUser);
         </script>
         
-        <!-- End signup -->
 
 
         
         
     </div>
+    <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"
+  ></script>
 
 
     <!-- jequery plugins -->
