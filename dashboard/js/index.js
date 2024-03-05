@@ -31,3 +31,37 @@ Orders.forEach(order => {
     tr.innerHTML = trContent;
     document.querySelector('table tbody').appendChild(tr);
 });
+
+function copyToClipboard() {
+    // Select the text to be copied
+    var copyText = document.getElementById("copyText");
+
+    // Create a range and select the text
+    var range = document.createRange();
+    range.selectNode(copyText);
+
+    // Add the selected text to the clipboard
+    window.getSelection().removeAllRanges(); // Clear previous selections
+    window.getSelection().addRange(range); // Add new range
+
+    // Use modern clipboard API for copying text
+    navigator.clipboard.writeText(copyText.innerText)
+      .then(function () {
+        // Provide user feedback
+        document.getElementById("copyButton").innerText = "Copied!";
+        
+        // Reset button text after a short delay
+        setTimeout(function () {
+          document.getElementById("copyButton").innerText = "Copy";
+        }, 1700);
+      })
+      .catch(function (err) {
+        console.error('Unable to copy text to clipboard', err);
+      })
+      .finally(function () {
+        // Clean up the range to avoid side effects
+        window.getSelection().removeAllRanges();
+      });
+  }
+
+
