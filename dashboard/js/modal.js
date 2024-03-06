@@ -25,8 +25,8 @@
   }
 
 
-  preview.addEventListener("click", showbox);
-  previewWith.addEventListener("click", showboxW);
+  // preview.addEventListener("click", showbox);
+  // previewWith.addEventListener("click", showboxW);
 
   // closeBox.addEventListener("click", closebox);
   // closeBoxWith.addEventListener("click", closeboxW);
