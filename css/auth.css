@@ -61,6 +61,7 @@ form {
 
 /* Add padding to containers */
 .auth-container {
+  max-width: 600px;
   height: 100vh;
   padding: 16px;
   padding-top: 200px;
@@ -113,6 +114,7 @@ hr {
   opacity: 0.9;
   box-shadow: 3px 3px 10px #151516;
   font-family: var(--title-font);
+  font-size: 18px;
   border-radius: 6px;
   transition: .2s;
 }
@@ -131,7 +133,7 @@ a {
   /* text-decoration: underline; */
 }
 a:hover {
-  color: rgb(111, 182, 254);
+  color: #6fb6fe;
   /* text-decoration: underline; */
 }
 
@@ -139,6 +141,17 @@ a:hover {
 .signin {
   /* background-color: #f1f1f1; */
   text-align: center;
+}
+#forgotpasslabel{
+  cursor: pointer;
+  font-size: 16px;
+  padding-top: 16px;
+  color: dodgerblue;
+  transition: .3s;
+}
+#forgotpasslabel:hover {
+  color: #6fb6fe;
+  transition: .3s;
 }
 
 .auth-image {
