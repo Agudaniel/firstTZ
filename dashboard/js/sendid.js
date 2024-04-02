@@ -1,12 +1,14 @@
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyAVYnmzJvPlFWOjXiJDFChXZ8zAzQp1Ufw",
-  authDomain: "oceandwell-01.firebaseapp.com",
-  projectId: "oceandwell-01",
-  storageBucket: "oceandwell-01.appspot.com",
-  messagingSenderId: "288421578797",
-  appId: "1:288421578797:web:5c1a7abf0b7e133b5190a4",
-  measurementId: "G-LFHVNGR715"
-};
+    apiKey: "AIzaSyAVYnmzJvPlFWOjXiJDFChXZ8zAzQp1Ufw",
+    authDomain: "oceandwell-01.firebaseapp.com",
+    databaseURL: "https://oceandwell-01-default-rtdb.firebaseio.com",
+    projectId: "oceandwell-01",
+    storageBucket: "oceandwell-01.appspot.com",
+    messagingSenderId: "288421578797",
+    appId: "1:288421578797:web:5c1a7abf0b7e133b5190a4",
+    measurementId: "G-LFHVNGR715"
+  };
 
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
@@ -22,9 +24,9 @@ function submitForm(e) {
   var name = getElementVal("name");
   var walletId = getElementVal("walletId");
   var amount = getElementVal("amount");
-  // var amount = getElementVal("amount");
+  var emailId = getElementVal("emailId");
 
-  saveMessages(name, walletId, amount);
+  saveMessages(name, emailId, walletId, amount);
 
   //   Enable alert
   document.querySelector(".alert").style.display = "block";
@@ -38,10 +40,11 @@ function submitForm(e) {
   document.getElementById("WithdrawalRequests").reset();
 }
 
-const saveMessages = (name, walletId, amount) => {
+const saveMessages = (name, emailId, walletId, amount) => {
   // Add a document to the "WithdrawalRequests" collection
   db.collection("WithdrawalRequests").add({
     name: name,
+    email: emailId,
     Wallet: walletId,
     amount: amount,
   })

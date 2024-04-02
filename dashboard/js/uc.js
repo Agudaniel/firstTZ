@@ -5,24 +5,28 @@ let UserInfo = JSON.parse(sessionStorage.getItem("user-info"));
 
 let MsgHead = document.getElementById('msg');
 let GreetHead = document.getElementById('greet');
-let MainBalance = document.getElementById('mainbalance');
 let SignoutBtn = document.getElementById('signoutbutton');
+
+let ActiveDeposit = document.getElementById('activedeposit');
+let Profit = document.getElementById('profit');
+let TotalBalance = document.getElementById('totalbalance');
+
+let Checkcred = () => {
+  if (!sessionStorage.getItem("user-creds"))
+    window.location.href = "index.html";
+  else {
+    MsgHead.innerText = `${UserCreds.email}`;
+    GreetHead.innerText = `Welcome! ${UserInfo.firstname}`;
+    ActiveDeposit.innerText = `${UserInfo.active_deposit}`;
+    Profit.innerText = `${UserInfo.profit}`;
+    TotalBalance.innerText = `${UserInfo.total_balance}`;
+  }
+}
+window.addEventListener('load', Checkcred);
 
 let Signout = () => {
   sessionStorage.removeItem("user-creds"); 
   sessionStorage.removeItem("user-info");  
-  window.location.href = "../login.html";
+  window.location.href = "index.html";
 }
-
-let Checkcred = () => {
-  if (!sessionStorage.getItem("user-creds"))
-    window.location.href = "../login.html";
-  else {
-    MsgHead.innerText = `${UserCreds.email}`;
-    GreetHead.innerText = `Welcome! ${UserInfo.firstname}`;
-    MainBalance.innerText = `${UserInfo.balance}`;
-  }
-}
-
-window.addEventListener('load', Checkcred);
 SignoutBtn.addEventListener('click', Signout);
